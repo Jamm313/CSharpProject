@@ -10,20 +10,29 @@ namespace JaeCovington.CodeLou.ExcerciseProject
     class Program
     {
         static string _studentRepositoryPath = $"{AppDomain.CurrentDomain.BaseDirectory}\\students.json";
+        
         static List<Student> studentList = File.Exists(_studentRepositoryPath) ? Read() : new List<Student>();
+        
         static void Save(){
             using (var file = File.CreateText(_studentRepositoryPath)){
                 file.WriteAsync(JsonSerializer.Serialize(studentList));
             }
         }
-        static List<Student> Read(){
+        
+        static List<Student> Read()
+
+        {
             var studentString = File.ReadAllText(_studentRepositoryPath);
             return JsonSerializer.Deserialize<List<Student>>(studentString);
         }
-        static void Main(string[] args){
+        static void Main(string[] args)
+        
+        {
             bool AppRunning = true;
             
-            while (AppRunning){ 
+            while (AppRunning)
+            
+            { 
                 DisplayMenu();
                 int input = Convert.ToInt32(Console.ReadLine());
                 if (input == 1){
@@ -42,7 +51,9 @@ namespace JaeCovington.CodeLou.ExcerciseProject
                 }   
             }
         }
-        public static void GetStudentInput(){
+        public static void GetStudentInput()
+        
+        {
             var studentRecord = new Student();
             while (true){
                 Console.WriteLine("Enter Student Id");
@@ -91,7 +102,10 @@ namespace JaeCovington.CodeLou.ExcerciseProject
             studentList.Add(studentRecord);
             Save();
         }
-        static void DisplayStudents(List<Student> studentList){
+
+        static void DisplayStudents(List<Student> studentList)
+        
+        {
             studentList.ForEach(s =>{
                 Console.WriteLine(s.studentRecord);
             });
